@@ -12,6 +12,12 @@ const conn = require("./db/conn");
 const Tought = require("./models/Tought");
 const User = require("./models/User");
 
+//import Routes
+const toughtsRoutes = require("./routes/toughtsRoutes");
+
+//import Controller
+const ToughtController = require("./controllers/ToughtController");
+
 app.use(
     express.urlencoded({
         extended: true,
@@ -61,6 +67,10 @@ app.engine("handlebars", exphbs.engine());
 app.set("view engine", "handlebars");
 
 app.use(express.static("public"));
+
+//Routes
+app.use("/toughts", toughtsRoutes);
+app.use("/", ToughtController.showToughts);
 
 conn.sync()
     .then(() => {
