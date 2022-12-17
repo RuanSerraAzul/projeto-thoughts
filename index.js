@@ -14,6 +14,7 @@ const User = require("./models/User");
 
 //import Routes
 const toughtsRoutes = require("./routes/toughtsRoutes");
+const authRoutes = require("./routes/authRoutes");
 
 //import Controller
 const ToughtController = require("./controllers/ToughtController");
@@ -70,6 +71,7 @@ app.use(express.static("public"));
 
 //Routes
 app.use("/toughts", toughtsRoutes);
+app.use("/", authRoutes);
 app.use("/", ToughtController.showToughts);
 
 conn.sync()
