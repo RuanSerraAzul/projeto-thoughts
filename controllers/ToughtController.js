@@ -9,7 +9,7 @@ module.exports = class ToughtController {
     }
 
     static async dashboard(req, res) {
-        const userId = req.session.userId;
+        const userId = req.session.userid;
 
         const user = await User.findOne({
             where: {
