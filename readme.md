@@ -33,50 +33,11 @@ Navegue até o diretório do projeto e use<br>
 Use este comando para executar os containers:<br>
 **docker-compose up -d**
 
-Agora, vamos entrar no container do mysql para adicionar as tabelas que serão usadas (será mudada para migration no futuro)<br>
-**docker-compose exec db mysql -h localhost -u root -p toughts -P 3307** senha:Ruan@123 (possivel mudar alterando no .env e no arquivo /db/conn.js) <br>
+Agora basta startar aplicação usando:<br>
+**docker-compose exec app npm start**
 
-Rodaremos a primeira query para gerar a tabela de users<br>
-
-```javascript
-CREATE TABLE `users` (
-`id` int NOT NULL AUTO_INCREMENT,
-`name` varchar(255) NOT NULL,
-`email` varchar(255) NOT NULL,
-`password` varchar(255) NOT NULL,
-`createdAt` datetime NOT NULL,
-`updatedAt` datetime NOT NULL,
-PRIMARY KEY (`id`)
-);
-```
-
-Rodaremos a segunda query para gerar a tabela de pensamentos<br>
-
-```javascript
-CREATE TABLE `toughts` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) NOT NULL,
-  `createdAt` datetime NOT NULL,
-  `updatedAt` datetime NOT NULL,
-  `UserId` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `UserId` (`UserId`),
-  CONSTRAINT `toughts_ibfk_1` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-);
-```
-
-A aplicação já esta pronta para uso no endereço "localhost:6868d"
-
-<!--
- Ruan@123-> acessar mysql
-criar tabela de pensamentos
-
-
-
-
-
--->
+Pronto, agora a aplicação esta rodando no endereço
 
 ```
-
+http://localhost:6868
 ```
