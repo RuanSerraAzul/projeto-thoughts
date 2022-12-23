@@ -23,11 +23,9 @@ module.exports = class ToughtController {
         const toughtsData = await Tought.findAll({
             include: User,
             where: {
-                title: {
-                    [Op.like]: `%${search}%`,
-                },
-                order: [["createdAt", order]],
+                title: { [Op.like]: `%${search}%` },
             },
+            order: [["createdAt", order]],
         });
 
         const toughts = toughtsData.map((result) =>
