@@ -14,7 +14,6 @@ Este projeto é parte do curso Node.js do Zero a Maestria, a idéia é fazer uma
 Como banco de dados usei o MySQL, pois é o banco de dados que mais trabalhei durante minha carreira como desenvolvedor, o que tornou o desenvolvimento mais fácil, pois já possuo conhecimento em MySQL.<br>
 Usamos handlebars como template engine pois é a template engine usada no curso, e também pensei que seria interessante trabalhar com uma nova template engine ao invés de usar apenas o Laravel Blade (sinta se a vontade para fazer uma versão do projeto usando React.js, Vue.js ou qualquer outro framework front-end que quiser).<br>
 
-<!--
 ## Instalação
 
 ### Requisitos
@@ -34,17 +33,50 @@ Navegue até o diretório do projeto e use<br>
 Use este comando para executar os containers:<br>
 **docker-compose up -d**
 
-Agora, vamos executar o composer install para instalar as dependências do aplicativo:<br>
-**docker-compose exec app composer install**
+Agora, vamos entrar no container do mysql para adicionar as tabelas que serão usadas (será mudada para migration no futuro)<br>
+**docker-compose exec db mysql -h localhost -u root -p toughts -P 3307** senha:Ruan@123 (possivel mudar alterando no .env e no arquivo /db/conn.js) <br>
 
-Rodaremos as nossas migrations para criar as tabelas do nosso banco de dados<br>
-**docker-compose exec app php artisan migrate**
+Rodaremos a primeira query para gerar a tabela de users<br>
 
-(Opcional) Foi inserido um pequeno seeder com apenas um úsuario para testar a rota de login<br>
-**docker-compose exec app php artisan db:seed**
+```javascript
+CREATE TABLE `users` (
+`id` int NOT NULL AUTO_INCREMENT,
+`name` varchar(255) NOT NULL,
+`email` varchar(255) NOT NULL,
+`password` varchar(255) NOT NULL,
+`createdAt` datetime NOT NULL,
+`updatedAt` datetime NOT NULL,
+PRIMARY KEY (`id`)
+);
+```
 
-Primeiro precisamos criar a chave da nossa aplicação usando:<br>
-**docker-compose exec app php artisan key:generate**
+Rodaremos a segunda query para gerar a tabela de pensamentos<br>
 
-Neste passo iremos criar a chave do nosso JWT usando:<br>
-**docker-compose exec app php artisan jwt:secret** -->
+```javascript
+CREATE TABLE `toughts` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL,
+  `UserId` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `UserId` (`UserId`),
+  CONSTRAINT `toughts_ibfk_1` FOREIGN KEY (`UserId`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+);
+```
+
+A aplicação já esta pronta para uso no endereço "localhost:6868d"
+
+<!--
+ Ruan@123-> acessar mysql
+criar tabela de pensamentos
+
+
+
+
+
+-->
+
+```
+
+```
