@@ -42,7 +42,9 @@
     {{#each toughts}}
         <figure>
             <blockquote>
-                "{{this.title}}"
+                <a href="/toughts/see/{{this.id}}" class="no-deco">
+                    "{{this.title}}"
+                </a>
             </blockquote>
             <figcaption>por <span>{{this.User.name}}</span></figcaption>
         </figure>

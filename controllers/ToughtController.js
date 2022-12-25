@@ -141,4 +141,16 @@ module.exports = class ToughtController {
             console.log(error);
         }
     }
+
+    static async seeTought(req, res) {
+        const id = req.params.id;
+
+        const tought = await Tought.findAll({
+            include: User,
+            where: { id: id },
+            raw: true,
+        });
+
+        res.render("toughts/see", { tought });
+    }
 };

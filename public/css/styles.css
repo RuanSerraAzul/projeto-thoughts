@@ -295,3 +295,11 @@ footer span {
     font-weight: bold;
     color: #f6982d;
 }
+
+/* Comments*/
+.no-deco {
+    text-decoration: none;
+}
+
+.toughts-comments-container {
+}
